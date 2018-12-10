@@ -34,9 +34,9 @@ public class Book {
     private String primaryExchange;
 
     @ColumnInfo(name = "latestTimestamp")
-    private Date timeStamp;
+    private String timeStamp;
 
-    public Book(Date timeStamp, String companySymbol, String companyName, double latestValue, double buyingPrice, int amount, String primaryExchange, String sector ){
+    public Book(String timeStamp, String companySymbol, String companyName, double latestValue, double buyingPrice, int amount, String primaryExchange, String sector ){
         this.companySymbol = companySymbol;
         this.companyName = companyName;
         this.latestValue = latestValue;
@@ -51,7 +51,7 @@ public class Book {
         return companySymbol;
     }
 
-    public Date getTimeStamp() {
+    public String getTimeStamp() {
         return timeStamp;
     }
 
@@ -87,7 +87,7 @@ public class Book {
         this.amount = amount;
     }
 
-    public void setTimeStamp(Date timeStamp) {
+    public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
     }
 
@@ -101,6 +101,10 @@ public class Book {
 
     public void setCompanySymbol(String companySymbol) {
         this.companySymbol = companySymbol;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public void setLatestValue(double latestValue) {

@@ -15,4 +15,5 @@
     <string name="technology">Technology</string>
     <string name="healthcare">Healthcare</string>
     <string name="basic_materials">Basic Materials</string>
+    <string name="stockData_Service">stockData Service</string>
 </resources>
