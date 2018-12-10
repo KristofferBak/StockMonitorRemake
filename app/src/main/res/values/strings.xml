@@ -2,4 +2,17 @@
     <string name="app_name">StockMonitorRemake</string>
     <string name="plus_sign">+</string>
     <string name="my_portfolio">My Portfolio</string>
+    <string name="back">Back</string>
+    <string name="edit">Edit</string>
+    <string name="details">Details</string>
+    <string name="name">Name</string>
+    <string name="price">Price</string>
+    <string name="amount">Amount</string>
+    <string name="sector">Sector</string>
+    <string name="button">Button</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="technology">Technology</string>
+    <string name="healthcare">Healthcare</string>
+    <string name="basic_materials">Basic Materials</string>
 </resources>

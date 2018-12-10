@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditActivity">
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="59dp"
+        android:layout_marginEnd="133dp"
+        android:text="@string/name"
+        app:layout_constraintEnd_toStartOf="@+id/editTextName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="133dp"
+        android:text="@string/price"
+        app:layout_constraintEnd_toStartOf="@+id/editTextPrice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+
+    <TextView
+        android:id="@+id/textViewAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="133dp"
+        android:text="@string/amount"
+        app:layout_constraintEnd_toStartOf="@+id/editTextAmount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPrice" />
+
+    <TextView
+        android:id="@+id/textViewSector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/sector"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAmount" />
+
+    <Button
+        android:id="@+id/buttonCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="63dp"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonEdit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buttonEdit" />
+
+    <Button
+        android:id="@+id/buttonEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="41dp"
+        android:text="@string/edit"
+        app:layout_constraintStart_toStartOf="@+id/radioButtonBasic_Materials"
+        app:layout_constraintTop_toBottomOf="@+id/radioButtonBasic_Materials" />
+
+    <RadioButton
+        android:id="@+id/radioButtonTech"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="223dp"
+        android:text="@string/technology"
+        app:layout_constraintStart_toStartOf="@+id/editTextAmount"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioButton
+        android:id="@+id/radioButtonHealth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/healthcare"
+        app:layout_constraintStart_toStartOf="@+id/radioButtonTech"
+        app:layout_constraintTop_toBottomOf="@+id/radioButtonTech" />
+
+    <RadioButton
+        android:id="@+id/radioButtonBasic_Materials"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="@string/basic_materials"
+        app:layout_constraintStart_toStartOf="@+id/radioButtonHealth"
+        app:layout_constraintTop_toBottomOf="@+id/radioButtonHealth" />
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="0dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="59dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="54dp"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextPrice"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="35dp"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toTopOf="@+id/editTextAmount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewPrice"
+        app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+
+    <EditText
+        android:id="@+id/editTextAmount"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="35dp"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/radioButtonTech"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewAmount"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPrice" />
+</android.support.constraint.ConstraintLayout>
