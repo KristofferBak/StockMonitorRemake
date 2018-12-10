@@ -4,24 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OverviewActivity">
+    tools:context=".OverviewActivity"
+    tools:layout_editor_absoluteY="81dp">
 
     <ListView
         android:id="@+id/list_stocks"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="34dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCaption"/>
+        app:layout_constraintTop_toBottomOf="@+id/textViewCaption" />
 
     <TextView
         android:id="@+id/textViewCaption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="34dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginBottom="33dp"
         android:text="@string/my_portfolio"
         app:layout_constraintBottom_toTopOf="@+id/list_stocks"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,10 +33,23 @@
         android:id="@+id/buttonAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="62dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="95dp"
         android:text="@string/plus_sign"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editTextaddSymbol"
+        app:layout_constraintTop_toBottomOf="@+id/list_stocks" />
+
+    <EditText
+        android:id="@+id/editTextaddSymbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="27dp"
+        android:inputType="text"
+        android:hint="@string/enter_a_stock_symbol_and_press_to_add_stock"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAdd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list_stocks" />
 

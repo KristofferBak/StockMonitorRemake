@@ -16,4 +16,5 @@
     <string name="healthcare">Healthcare</string>
     <string name="basic_materials">Basic Materials</string>
     <string name="stockData_Service">stockData Service</string>
+    <string name="enter_a_stock_symbol_and_press_to_add_stock">Enter a stock symbol \n and press + to add stock:</string>
 </resources>

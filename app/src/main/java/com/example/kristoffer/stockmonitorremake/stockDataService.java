@@ -42,12 +42,19 @@ import static com.example.kristoffer.stockmonitorremake.GlobalVariables.url_book
  *  Also this service is communicating with the local room database.
  *  If the room db is empty, the service will get data on ten predetermined stocks
  *
+ *  Inspiration for this class is found in multiple places:
+ *  https://developer.android.com/guide/components/services
+ *
  */
 
-public class stockDataService extends Service {
+public final class stockDataService extends Service {
 
-
+    private static Context context;
     private Handler handler;
+
+    public static void init(Context context){
+        stockDataService.context = context;
+    }
 
     @Override
     public void onCreate(){
@@ -78,7 +85,7 @@ public class stockDataService extends Service {
         bTask.execute(url+symbol+url_books_suffix);
     }
 
-    private class BookTask extends AsyncTask<String, Void, String> {
+    private static class BookTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
             Log.d(connect, "Starting background task");
@@ -118,17 +125,33 @@ public class stockDataService extends Service {
         return START_STICKY;
     }
 
-    private void broadcastResult(String res) {
+    private static void broadcastResult(String res) {
         Intent broadcastResultsIntent = new Intent();
         broadcastResultsIntent.putExtra(put_extra_broadcast_result, res);
         broadcastResultsIntent.setAction(broadcast_results);
 
-        LocalBroadcastManager.getInstance(this).sendBroadcast(broadcastResultsIntent);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(broadcastResultsIntent);
         Log.d(log_msg_stockDataService, "Results from broadcasting: " + res);
     }
 
     public List<Book> getBooks(Context context){
         return BookDb.getBookDb(context).bookDao().getAllBooks();
+    }
+
+    public void deleteBook(Context con, Book book){
+        BookDb.getBookDb(con).bookDao().delete(book);
+    }
+
+    public void updateBook(Context con, Book book){
+        BookDb.getBookDb(con).bookDao().update(book);
+    }
+
+    public void insertBook(Context con, Book book){
+        BookDb.getBookDb(con).bookDao().insert(book);
+    }
+
+    public Book getBook(Context con, String symbol ){
+        return BookDb.getBookDb(con).bookDao().findBookBySymbol(symbol);
     }
 
     @Override
@@ -137,7 +160,7 @@ public class stockDataService extends Service {
     }
 
     //connectToUrl is taken from/inspired by: https://stackoverflow.com/questions/35547375/android-studio-connecting-to-a-url
-    private String connectToURL(String callUrl) {
+    private static String connectToURL(String callUrl) {
         InputStream is = null;
 
         try {
@@ -175,7 +198,7 @@ public class stockDataService extends Service {
     }
 
     //streamToString is inspired by/ taken from: https://stackoverflow.com/questions/2492076/android-reading-from-an-input-stream-efficiently
-    private String streamToString(InputStream is) {
+    private static String streamToString(InputStream is) {
         StringBuilder returnString = new StringBuilder();
         String line;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
