@@ -7,16 +7,14 @@
     tools:context=".OverviewActivity">
 
     <ListView
-        android:id="@+id/list_"
+        android:id="@+id/list_stocks"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="52dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCaption">
-
-    </ListView>
+        app:layout_constraintTop_toBottomOf="@+id/textViewCaption"/>
 
     <TextView
         android:id="@+id/textViewCaption"
@@ -25,7 +23,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="34dp"
         android:text="@string/my_portfolio"
-        app:layout_constraintBottom_toTopOf="@+id/list_"
+        app:layout_constraintBottom_toTopOf="@+id/list_stocks"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,6 +37,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_" />
+        app:layout_constraintTop_toBottomOf="@+id/list_stocks" />
 
 </android.support.constraint.ConstraintLayout>
