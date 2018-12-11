@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IBinder;
@@ -32,7 +33,6 @@ import static com.example.kristoffer.stockmonitorremake.GlobalVariables.notifica
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.put_extra_broadcast_result;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.stockDataService_destroyed;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.stock_data_service_id;
-import static com.example.kristoffer.stockmonitorremake.GlobalVariables.symbol;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.url;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.url_books_suffix;
 
@@ -44,17 +44,15 @@ import static com.example.kristoffer.stockmonitorremake.GlobalVariables.url_book
  *
  *  Inspiration for this class is found in multiple places:
  *  https://developer.android.com/guide/components/services
+ *  https://developer.android.com/training/run-background-service/report-status
  *
  */
 
 public final class stockDataService extends Service {
 
-    private static Context context;
     private Handler handler;
 
-    public static void init(Context context){
-        stockDataService.context = context;
-    }
+    public stockDataService(){}
 
     @Override
     public void onCreate(){
@@ -80,12 +78,13 @@ public final class stockDataService extends Service {
         }
     };
 
+    //https://developer.android.com/training/run-background-service/report-status
     private void backgroundTask(String companySymbol) {
         BookTask bTask = new BookTask();
-        bTask.execute(url+symbol+url_books_suffix);
+        bTask.execute(url+companySymbol+url_books_suffix);
     }
 
-    private static class BookTask extends AsyncTask<String, Void, String> {
+    private class BookTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
             Log.d(connect, "Starting background task");
@@ -125,12 +124,12 @@ public final class stockDataService extends Service {
         return START_STICKY;
     }
 
-    private static void broadcastResult(String res) {
+    private void broadcastResult(String res) {
         Intent broadcastResultsIntent = new Intent();
         broadcastResultsIntent.putExtra(put_extra_broadcast_result, res);
         broadcastResultsIntent.setAction(broadcast_results);
 
-        LocalBroadcastManager.getInstance(context).sendBroadcast(broadcastResultsIntent);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(broadcastResultsIntent);
         Log.d(log_msg_stockDataService, "Results from broadcasting: " + res);
     }
 
@@ -213,6 +212,7 @@ public final class stockDataService extends Service {
 
         return returnString.toString();
     }
+
 
     @Override
     public void onDestroy(){
