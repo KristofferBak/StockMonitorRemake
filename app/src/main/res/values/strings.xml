@@ -17,4 +17,11 @@
     <string name="basic_materials">Basic Materials</string>
     <string name="stockData_Service">stockData Service</string>
     <string name="enter_a_stock_symbol_and_press_to_add_stock">Enter a stock symbol \n and press + to add stock:</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="enter_amount">Enter amount</string>
+    <string name="enter_the_buying_price">Enter the buying price</string>
+    <string name="save">save</string>
+    <string name="company_name">Company name</string>
+    <string name="current_price">Current price</string>
+    <string name="diffprice">DiffPrice</string>
 </resources>

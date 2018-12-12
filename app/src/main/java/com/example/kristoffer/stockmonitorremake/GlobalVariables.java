@@ -5,6 +5,7 @@ public class GlobalVariables {
     static final int go_to_details = 111;
     static final int stock_data_service_id = 112233;
     static final int response_delete = 113322;
+    static final int go_to_edit = 223311;
 
     static final String symbol = "Symbol";
     static final String position = "Position";

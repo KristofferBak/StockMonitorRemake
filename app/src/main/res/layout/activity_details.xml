@@ -11,8 +11,8 @@
         android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="33dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="17dp"
         android:text="@string/back"
         app:layout_constraintBottom_toTopOf="@+id/buttonDelete"
         app:layout_constraintEnd_toStartOf="@+id/buttonDelete" />
@@ -21,7 +21,7 @@
         android:id="@+id/buttonEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="33dp"
+        android:layout_marginBottom="17dp"
         android:text="@string/edit"
         app:layout_constraintBottom_toTopOf="@+id/buttonDelete"
         app:layout_constraintStart_toEndOf="@+id/buttonDelete" />
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginBottom="41dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/name"
         app:layout_constraintBottom_toTopOf="@+id/textViewPrice"
         app:layout_constraintStart_toStartOf="parent" />
@@ -51,8 +51,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginBottom="46dp"
         android:gravity="center"
-        android:layout_marginBottom="48dp"
         app:layout_constraintBottom_toTopOf="@+id/textViewPriceDisplay"
         app:layout_constraintStart_toStartOf="@+id/textViewPriceDisplay" />
 
@@ -60,8 +60,7 @@
         android:id="@+id/textViewPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="38dp"
+        android:layout_marginBottom="37dp"
         android:text="@string/price"
         app:layout_constraintBottom_toTopOf="@+id/textViewAmount"
         app:layout_constraintEnd_toEndOf="@+id/textViewAmount" />
@@ -78,11 +77,12 @@
         android:id="@+id/textViewAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="217dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="33dp"
         android:text="@string/amount"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/textViewSector"
+        app:layout_constraintEnd_toEndOf="@+id/textViewName"
+        app:layout_constraintStart_toStartOf="@+id/textViewTimestamp" />
 
     <TextView
         android:id="@+id/textViewAmountDisplay"
@@ -98,20 +98,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="21dp"
         android:text="@string/sector"
-        app:layout_constraintEnd_toEndOf="@+id/textViewName"
-        app:layout_constraintStart_toStartOf="@+id/textViewAmount"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAmount" />
+        app:layout_constraintBottom_toTopOf="@+id/textViewTimestamp"
+        app:layout_constraintStart_toStartOf="@+id/textViewTimestamp" />
 
     <TextView
         android:id="@+id/textViewSectorDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="@+id/buttonEdit"
-        app:layout_constraintStart_toStartOf="@+id/buttonEdit"
+        android:layout_marginTop="22dp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTimestampDisplay"
+        app:layout_constraintStart_toStartOf="@+id/textViewTimestampDisplay"
         app:layout_constraintTop_toBottomOf="@+id/textViewAmountDisplay" />
 
     <Button
@@ -123,4 +121,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewTimestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="43dp"
+        android:layout_marginBottom="43dp"
+        android:text="@string/timestamp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonBack"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewTimestampDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonEdit"
+        app:layout_constraintStart_toStartOf="@+id/buttonEdit"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSectorDisplay" />
 </android.support.constraint.ConstraintLayout>

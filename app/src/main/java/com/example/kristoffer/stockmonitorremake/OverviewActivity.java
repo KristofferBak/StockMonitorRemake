@@ -43,9 +43,6 @@ public class OverviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_overview);
 
         stockDataService = new stockDataService();
-        //load books from service
-
-        loadBooksFromRoomAndRefreshList();
 
         portfolio = findViewById(R.id.list_stocks);
         caption = findViewById(R.id.textViewCaption);
@@ -62,6 +59,9 @@ public class OverviewActivity extends AppCompatActivity {
         });
 
         btnAdd.setOnClickListener(listener -> addBook());
+
+        //load books from service
+        loadBooksFromRoomAndRefreshList();
 
         /**
         //Create testdata:
@@ -132,8 +132,11 @@ public class OverviewActivity extends AppCompatActivity {
 
     private void loadBooksFromRoomAndRefreshList(){
         books = stockDataService.getBooks(this);
-        bookAdaptor.setStocks(books);
-        bookAdaptor.notifyDataSetChanged();
+        if(books != null || books.size()!= 0){
+            bookAdaptor.setStocks(books);
+            bookAdaptor.notifyDataSetChanged();
+            }
+
     }
 
     private void addBook(){
