@@ -4,12 +4,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.text.PrecomputedTextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -18,9 +17,13 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import static com.example.kristoffer.stockmonitorremake.GlobalVariables.broadcast_background_service_result;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.extra_company_symbol;
+import static com.example.kristoffer.stockmonitorremake.GlobalVariables.extra_details_company_symbol;
+import static com.example.kristoffer.stockmonitorremake.GlobalVariables.go_to_details;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.log_msg_stockDataService;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.put_extra_broadcast_result;
+import static com.example.kristoffer.stockmonitorremake.GlobalVariables.response_delete;
 
 public class OverviewActivity extends AppCompatActivity {
 
@@ -41,7 +44,8 @@ public class OverviewActivity extends AppCompatActivity {
 
         stockDataService = new stockDataService();
         //load books from service
-        books = stockDataService.getBooks(this);
+
+        loadBooksFromRoomAndRefreshList();
 
         portfolio = findViewById(R.id.list_stocks);
         caption = findViewById(R.id.textViewCaption);
@@ -59,9 +63,24 @@ public class OverviewActivity extends AppCompatActivity {
 
         btnAdd.setOnClickListener(listener -> addBook());
 
+        /**
+        //Create testdata:
+        Book testBook = new Book();
+        testBook.setAmount(10);
+        testBook.setTimeStamp(String.valueOf(System.currentTimeMillis()));
+        testBook.setLatestValue(100);
+        testBook.setBuyingPrice(100);
+        testBook.setCompanyName("Facebook");
+        testBook.setCompanySymbol("fb");
+        testBook.setSector("Technology");
+        testBook.setPrimaryExchange("");
+        books.add(testBook);
+        stockDataService.insertBook(this ,testBook);
+         **/
+
         //prepopulate portfolio with books, if empty:
         if(books.isEmpty()){
-            String[] defaultStocks = {"fb","tsla"};
+            String[] defaultStocks = {"fb","tsla","ge","gs","grub","f","c","bac"};
             for (String symbol: defaultStocks) {
                 Intent intent = new Intent(OverviewActivity.this, stockDataService.class);
                 intent.putExtra(extra_company_symbol, symbol);
@@ -84,8 +103,18 @@ public class OverviewActivity extends AppCompatActivity {
                 for (Book book: books) {
                     if(book.getCompanySymbol().equals(resultBook.getCompanySymbol())){
                         stockAlreadyInPortfolio = true;
-                        return; //toDo find that book in the db and update latestValue and timestamp
+                        //toDo find that book in the db and update latestValue and timestamp
+                        book.setLatestValue(resultBook.getLatestValue());
+                        book.setTimeStamp(resultBook.getTimeStamp());
+                        stockDataService.updateBook(context, book);
                         //toDo: find the right indexs in portfolio and replace the old book with the new
+                        for (Book b: books) {
+                            if(b.getCompanySymbol().equals(resultBook.getCompanyName())){
+                                b = resultBook;
+                            }
+                        }
+
+                        return;
                     }
                 }
 
@@ -101,6 +130,12 @@ public class OverviewActivity extends AppCompatActivity {
         }
     };
 
+    private void loadBooksFromRoomAndRefreshList(){
+        books = stockDataService.getBooks(this);
+        bookAdaptor.setStocks(books);
+        bookAdaptor.notifyDataSetChanged();
+    }
+
     private void addBook(){
         String symbol = addSymbol.getText().toString();
         String symbolTrim = symbol.trim();
@@ -113,11 +148,23 @@ public class OverviewActivity extends AppCompatActivity {
         Intent intent = new Intent(OverviewActivity.this, stockDataService.class);
         intent.putExtra(extra_company_symbol, symbolTrim);
         startService(intent);
+        addSymbol.setText("");
     }
 
     private void goToDetails(Book b, int position) {
         Intent detailsIntent = new Intent(OverviewActivity.this, DetailsActivity.class);
+        detailsIntent.putExtra(extra_details_company_symbol, b.getCompanySymbol());
 
+        startActivityForResult(detailsIntent, go_to_details);
+    }
+
+    @Override
+    protected void onActivityResult(int reqcode, int rescode, @Nullable Intent data){
+        super.onActivityResult(reqcode, rescode, data);
+
+        if(rescode == response_delete){
+        //todO delete the book with the right symbol from the db
+        }
     }
 
     @Override
@@ -126,7 +173,10 @@ public class OverviewActivity extends AppCompatActivity {
         Log.d(log_msg_stockDataService, "Registering broadcastReceiver");
 
         IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(broadcast_background_service_result);
         LocalBroadcastManager.getInstance(this).registerReceiver(resultsReceiver, intentFilter);
+
+        loadBooksFromRoomAndRefreshList();
     }
 
     @Override

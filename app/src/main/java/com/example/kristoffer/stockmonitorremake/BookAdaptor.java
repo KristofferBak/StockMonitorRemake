@@ -13,7 +13,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 /**
- * Created by leafcastle on 24/04/16 - modified by kristoffer bak on 07/11/18.
+ * Created by leafcastle on 24/04/16 - modified by kristoffer bak on 12/12/18.
  */
 
 public class BookAdaptor extends BaseAdapter {

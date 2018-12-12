@@ -9,6 +9,8 @@ import java.util.Date;
 @Entity(tableName = "book")
 public class Book {
 
+    public Book(){}
+
     @PrimaryKey(autoGenerate = true)
     private int uid;
 

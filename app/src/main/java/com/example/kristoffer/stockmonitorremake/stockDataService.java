@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
@@ -25,6 +26,7 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import static com.example.kristoffer.stockmonitorremake.GlobalVariables.broadcast_background_service_result;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.broadcast_results;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.connect;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.extra_company_symbol;
@@ -106,9 +108,16 @@ public final class stockDataService extends Service {
             String companySymbol = intent.getStringExtra(extra_company_symbol);
 
             //Inspiration for the foreground service is found here: https://stackoverflow.com/questions/5528288/how-do-i-update-the-notification-text-for-a-foreground-service-in-android
-            NotificationManager notManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            NotificationChannel notChannel = new NotificationChannel(notification_channel_name, "books", NotificationManager.IMPORTANCE_LOW);
-            notManager.createNotificationChannel(notChannel);
+
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                NotificationManager notManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                NotificationChannel notChannel = new NotificationChannel(notification_channel_name, "books", NotificationManager.IMPORTANCE_LOW);
+
+                //Only build the channel once:
+                if(notManager != null){
+                    notManager.createNotificationChannel(notChannel);
+                }
+            }
 
             Notification notification = new NotificationCompat.Builder(this, "books")
                     .setContentTitle(getString(R.string.stockData_Service)).setContentText(getText(R.string.stockData_Service)).
@@ -120,14 +129,15 @@ public final class stockDataService extends Service {
             backgroundTask(companySymbol);
 
         }
-        //The system will try to recreate the service after it is killed:
+        //The system will try to recreate the service after/if it is killed:
         return START_STICKY;
     }
 
     private void broadcastResult(String res) {
         Intent broadcastResultsIntent = new Intent();
         broadcastResultsIntent.putExtra(put_extra_broadcast_result, res);
-        broadcastResultsIntent.setAction(broadcast_results);
+        //setting the action tag:
+        broadcastResultsIntent.setAction(broadcast_background_service_result);
 
         LocalBroadcastManager.getInstance(this).sendBroadcast(broadcastResultsIntent);
         Log.d(log_msg_stockDataService, "Results from broadcasting: " + res);
