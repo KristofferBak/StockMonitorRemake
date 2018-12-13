@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">StockMonitorRemake</string>
+    <string name="plus_sign">+</string>
+    <string name="my_portfolio">Min portefølje</string>
+    <string name="back">Tilbage</string>
+    <string name="edit">Redigér</string>
+    <string name="details">Detaljer</string>
+    <string name="name">Navn</string>
+    <string name="price">Pris</string>
+    <string name="amount">Antal:</string>
+    <string name="sector">Sektor:</string>
+    <string name="button">Knap</string>
+    <string name="delete">Slet</string>
+    <string name="cancel">Annullér</string>
+    <string name="technology">Teknologi</string>
+    <string name="healthcare">Healthcare</string>
+    <string name="basic_materials">Grund Materialer</string>
+    <string name="stockData_Service">stockData Service</string>
+    <string name="enter_a_stock_symbol_and_press_to_add_stock">Skriv et aktiesymbol \n og tryk + for at tilføje:</string>
+    <string name="timestamp">Timestamp:</string>
+    <string name="enter_amount">Indtast antal</string>
+    <string name="enter_the_buying_price">Indtast købspris</string>
+    <string name="save">Gem</string>
+    <string name="company_name">Virksomhedsnavn:</string>
+    <string name="current_price">Nuværende pris:</string>
+    <string name="diffprice">Forskel</string>
+    <string name="buying_price">Købspris:</string>
+    <string name="primaryexchange">Primære vekselhus:</string>
+    <string name="update">Opdatér</string>
+</resources>

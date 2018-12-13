@@ -11,8 +11,8 @@
         android:id="@+id/list_stocks"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="34dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
+        android:layout_marginBottom="26dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonUpdate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewCaption" />
@@ -33,24 +33,35 @@
         android:id="@+id/buttonAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="95dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="25dp"
         android:text="@string/plus_sign"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editTextaddSymbol"
-        app:layout_constraintTop_toBottomOf="@+id/list_stocks" />
+        app:layout_constraintStart_toEndOf="@+id/editTextaddSymbol" />
 
     <EditText
         android:id="@+id/editTextaddSymbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="27dp"
-        android:inputType="text"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="16dp"
         android:hint="@string/enter_a_stock_symbol_and_press_to_add_stock"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonAdd"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonUpdate" />
+
+    <Button
+        android:id="@+id/buttonUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="19dp"
+        android:text="@string/update"
+        app:layout_constraintBottom_toTopOf="@+id/editTextaddSymbol"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list_stocks" />
 
 </android.support.constraint.ConstraintLayout>

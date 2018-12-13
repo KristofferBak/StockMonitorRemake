@@ -22,6 +22,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.time.Instant;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -52,6 +53,7 @@ import static com.example.kristoffer.stockmonitorremake.GlobalVariables.url_book
 public final class stockDataService extends Service {
 
     private Handler handler;
+    private boolean started = false;
 
     public stockDataService(){}
 
@@ -102,24 +104,23 @@ public final class stockDataService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startID){
-        if(intent != null){
+        if(intent != null && !started){
             Log.d(log_msg_stockDataService, "stockDataServce osStart called...");
+           // started = true;
             String companySymbol = intent.getStringExtra(extra_company_symbol);
 
             //Inspiration for the foreground service is found here: https://stackoverflow.com/questions/5528288/how-do-i-update-the-notification-text-for-a-foreground-service-in-android
+            //Inspiration is also found in "serviceDemo" -example from the course ITSMAP
 
             if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
+                NotificationChannel notChannel = new NotificationChannel("books", "Visible books", NotificationManager.IMPORTANCE_LOW);
                 NotificationManager notManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                NotificationChannel notChannel = new NotificationChannel(notification_channel_name, "books", NotificationManager.IMPORTANCE_LOW);
 
-                //Only build the channel once:
-                if(notManager != null){
                     notManager.createNotificationChannel(notChannel);
-                }
             }
 
-            Notification notification = new NotificationCompat.Builder(this, "books")
-                    .setContentTitle(getString(R.string.stockData_Service)).setContentText(getText(R.string.stockData_Service)).
+            Notification notification = new NotificationCompat.Builder(this,"books")
+                    .setContentTitle(getString(R.string.stockData_Service)).setContentText("Server contacted at " + Instant.now()).
                             setSmallIcon(R.mipmap.ic_stockdataserviceforeground).setTicker(getText(R.string.stockData_Service))
                             .setChannelId("books").build();
 
@@ -228,8 +229,10 @@ public final class stockDataService extends Service {
 
     @Override
     public void onDestroy(){
+        started = false;
+        handler.removeCallbacks(executeTask);
         Log.d(log_msg_stockDataService, stockDataService_destroyed);
         super.onDestroy();
-        handler.removeCallbacks(executeTask);
+
     }
 }

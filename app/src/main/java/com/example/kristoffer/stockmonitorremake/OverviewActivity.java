@@ -32,6 +32,7 @@ public class OverviewActivity extends AppCompatActivity {
     private ListView portfolio;
     private TextView caption;
     private Button btnAdd;
+    private Button update;
     private List<Book> books;
     private EditText addSymbol;
 
@@ -50,6 +51,7 @@ public class OverviewActivity extends AppCompatActivity {
         caption = findViewById(R.id.textViewCaption);
         btnAdd = findViewById(R.id.buttonAdd);
         addSymbol = findViewById(R.id.editTextaddSymbol);
+        update = findViewById(R.id.buttonUpdate);
 
         bookAdaptor = new BookAdaptor(this, books);
         portfolio.setAdapter(bookAdaptor);
@@ -61,6 +63,7 @@ public class OverviewActivity extends AppCompatActivity {
         });
 
         btnAdd.setOnClickListener(listener -> addBook());
+        update.setOnClickListener(listener -> updatePressed());
 
         //load books from service
         loadBooksFromRoomAndRefreshList();
@@ -160,6 +163,15 @@ public class OverviewActivity extends AppCompatActivity {
         detailsIntent.putExtra(extra_details_company_symbol, b.getCompanySymbol());
 
         startActivityForResult(detailsIntent, go_to_details);
+    }
+
+    private void updatePressed() {
+        for (Book b:books) {
+            String symbol = b.getCompanySymbol();
+            Intent intent = new Intent(OverviewActivity.this, stockDataService.class);
+            intent.putExtra(extra_company_symbol, symbol);
+            startService(intent);
+        }
     }
 
     @Override

@@ -26,4 +26,5 @@
     <string name="diffprice">DiffPrice</string>
     <string name="buying_price">Buying price:</string>
     <string name="primaryexchange">PrimaryExchange:</string>
+    <string name="update">Update</string>
 </resources>
