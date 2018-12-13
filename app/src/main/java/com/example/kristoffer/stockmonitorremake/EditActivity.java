@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.extra_details_company_symbol;
 
@@ -57,6 +58,13 @@ private Book book;
 
     private void save(){
         //toDo : validation
+
+        if(editTextAmount.getText().toString().trim().equals("")|| editTextBuyingPrice.getText().toString().trim().equals("")){
+
+            Toast.makeText(EditActivity.this, "You must input values", Toast.LENGTH_SHORT).show();
+
+            return;
+        }
 
         if(editTextAmount.getText() != null || editTextBuyingPrice.getText() != null || editTextAmount.getText().toString() != "" || editTextBuyingPrice.getText().toString() != ""){
             String editedAmount = editTextAmount.getText().toString();

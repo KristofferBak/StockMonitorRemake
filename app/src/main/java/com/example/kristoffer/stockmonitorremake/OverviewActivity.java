@@ -82,7 +82,7 @@ public class OverviewActivity extends AppCompatActivity {
 
         //prepopulate portfolio with books, if empty:
         if(books.isEmpty()){
-            String[] defaultStocks = {"fb","tsla","ge","gs","grub","f","c","bac"};
+            String[] defaultStocks = {"fb","tsla","ge","gs","grub","f","c","bac","g","h"};
             for (String symbol: defaultStocks) {
                 Intent intent = new Intent(OverviewActivity.this, stockDataService.class);
                 intent.putExtra(extra_company_symbol, symbol);

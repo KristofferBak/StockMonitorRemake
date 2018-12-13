@@ -5,111 +5,100 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EditActivity"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="73dp">
 
     <TextView
         android:id="@+id/textViewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="69dp"
-        android:layout_marginEnd="102dp"
+        android:layout_marginBottom="25dp"
         android:text="@string/name"
-        app:layout_constraintEnd_toStartOf="@+id/textViewComapanyNamyDisplay"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/textViewPrice"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="113dp"
         android:text="@string/buying_price"
-        app:layout_constraintEnd_toStartOf="@+id/editTextPrice"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="186dp"
-        android:layout_marginEnd="86dp"
-        android:layout_marginBottom="186dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="113dp"
         android:text="@string/amount"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCancel"
-        app:layout_constraintEnd_toStartOf="@+id/editTextAmount"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="139dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/cancel"
-        app:layout_constraintBaseline_toBaselineOf="@+id/buttonEdit"
-        app:layout_constraintEnd_toStartOf="@+id/buttonEdit"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="19dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonCancel" />
+        app:layout_constraintEnd_toEndOf="@+id/editTextAmount" />
 
     <EditText
         android:id="@+id/editTextPrice"
         android:layout_width="0dp"
         android:layout_height="49dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="55dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="113dp"
         android:hint="@string/buying_price"
         android:inputType="numberDecimal"
-        app:layout_constraintBottom_toTopOf="@+id/editTextAmount"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewPrice"
-        app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+        app:layout_constraintEnd_toEndOf="@+id/textViewComapanyNamyDisplay"
+        app:layout_constraintStart_toStartOf="@+id/textViewComapanyNamyDisplay"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextAmount"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginTop="186dp"
-        android:layout_marginEnd="58dp"
+        android:layout_marginTop="66dp"
+        android:layout_marginBottom="68dp"
         android:hint="@string/enter_amount"
         android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewAmount"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/buttonCancel"
+        app:layout_constraintEnd_toEndOf="@+id/editTextPrice"
+        app:layout_constraintStart_toStartOf="@+id/editTextPrice"
+        app:layout_constraintTop_toTopOf="@+id/editTextPrice" />
 
     <TextView
         android:id="@+id/textViewEditCaption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="32dp"
         android:text="@string/edit"
         app:layout_constraintEnd_toStartOf="@+id/textViewComapanyNamyDisplay"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewComapanyNamyDisplay"
-        android:layout_width="0dp"
+        android:layout_width="373dp"
         android:layout_height="43dp"
         android:layout_marginTop="19dp"
-        android:layout_marginEnd="49dp"
+        android:layout_marginEnd="48dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/editTextPrice"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewName"
         app:layout_constraintTop_toBottomOf="@+id/textViewEditCaption" />
 </android.support.constraint.ConstraintLayout>

@@ -27,7 +27,6 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.broadcast_background_service_result;
-import static com.example.kristoffer.stockmonitorremake.GlobalVariables.broadcast_results;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.connect;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.extra_company_symbol;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.log_msg_stockDataService;
@@ -80,7 +79,7 @@ public final class stockDataService extends Service {
         }
     };
 
-    //https://developer.android.com/training/run-background-service/report-status
+
     private void backgroundTask(String companySymbol) {
         BookTask bTask = new BookTask();
         bTask.execute(url+companySymbol+url_books_suffix);
@@ -125,7 +124,7 @@ public final class stockDataService extends Service {
                             .setChannelId("books").build();
 
 
-         //   startForeground(stock_data_service_id, notification);
+            startForeground(stock_data_service_id, notification);
             backgroundTask(companySymbol);
 
         }

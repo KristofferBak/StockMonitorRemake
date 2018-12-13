@@ -34,6 +34,8 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView textViewSectorDisplayed;
     private TextView textViewTimestamp;
     private TextView textViewTimestampDisplay;
+    private TextView textViewPrimaryEx;
+    private TextView getTextViewPrimaryExDisplay;
     private Button back, edit, delete;
     private Intent intent;
     private stockDataService service;
@@ -51,17 +53,19 @@ public class DetailsActivity extends AppCompatActivity {
         String companySymbol = intent.getStringExtra(extra_details_company_symbol);
         book = service.getBook(this, companySymbol);
 
-        textViewName = findViewById(R.id.textViewName);
+        //textViewName = findViewById(R.id.textViewName);
         textViewCompanyName = findViewById(R.id.textViewNameDisplay);
-        textViewCompanyName.setGravity(Gravity.RELATIVE_HORIZONTAL_GRAVITY_MASK);
-        textViewPrice = findViewById(R.id.textViewPrice);
+        //textViewCompanyName.setGravity(Gravity.RELATIVE_HORIZONTAL_GRAVITY_MASK);
+        //textViewPrice = findViewById(R.id.textViewPrice);
         textViewStockPrice = findViewById(R.id.textViewPriceDisplay);
-        textViewAmount = findViewById(R.id.textViewAmount);
+        //textViewAmount = findViewById(R.id.textViewAmount);
         textViewAmountOwned = findViewById(R.id.textViewAmountDisplay);
-        textViewSector = findViewById(R.id.textViewSector);
+        //textViewSector = findViewById(R.id.textViewSector);
         textViewSectorDisplayed = findViewById(R.id.textViewSectorDisplay);
-        textViewTimestamp = findViewById(R.id.textViewTimestamp);
+        //textViewTimestamp = findViewById(R.id.textViewTimestamp);
         textViewTimestampDisplay = findViewById(R.id.textViewTimestampDisplay);
+        //textViewPrimaryEx = findViewById(R.id.textViewPrimaryEx);
+        getTextViewPrimaryExDisplay = findViewById(R.id.textViewPrimaryExDisplay);
 
         back = findViewById(R.id.buttonBack);
         edit = findViewById(R.id.buttonEdit);
@@ -72,6 +76,7 @@ public class DetailsActivity extends AppCompatActivity {
         textViewAmountOwned.setText(String.valueOf(book.getAmount()));
         textViewSectorDisplayed.setText(book.getSector());
         textViewTimestampDisplay.setText(book.getTimeStamp());
+        getTextViewPrimaryExDisplay.setText(book.getPrimaryExchange());
 
         back.setOnClickListener(l -> back());
         delete.setOnClickListener(l -> delete());
