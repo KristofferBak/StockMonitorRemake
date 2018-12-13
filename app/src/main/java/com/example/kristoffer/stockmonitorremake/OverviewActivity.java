@@ -24,6 +24,8 @@ import static com.example.kristoffer.stockmonitorremake.GlobalVariables.go_to_de
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.log_msg_stockDataService;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.put_extra_broadcast_result;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.response_delete;
+import static com.example.kristoffer.stockmonitorremake.GlobalVariables.response_save;
+import static com.example.kristoffer.stockmonitorremake.GlobalVariables.symbol_from_delete;
 
 public class OverviewActivity extends AppCompatActivity {
 
@@ -55,7 +57,7 @@ public class OverviewActivity extends AppCompatActivity {
             Book b = books.get(position);
             
             if(b != null)
-                goToDetails(b, position);
+                goToDetails(b);
         });
 
         btnAdd.setOnClickListener(listener -> addBook());
@@ -136,7 +138,6 @@ public class OverviewActivity extends AppCompatActivity {
             bookAdaptor.setStocks(books);
             bookAdaptor.notifyDataSetChanged();
             }
-
     }
 
     private void addBook(){
@@ -154,7 +155,7 @@ public class OverviewActivity extends AppCompatActivity {
         addSymbol.setText("");
     }
 
-    private void goToDetails(Book b, int position) {
+    private void goToDetails(Book b) {
         Intent detailsIntent = new Intent(OverviewActivity.this, DetailsActivity.class);
         detailsIntent.putExtra(extra_details_company_symbol, b.getCompanySymbol());
 
@@ -165,9 +166,27 @@ public class OverviewActivity extends AppCompatActivity {
     protected void onActivityResult(int reqcode, int rescode, @Nullable Intent data){
         super.onActivityResult(reqcode, rescode, data);
 
-        if(rescode == response_delete){
-        //todO delete the book with the right symbol from the db
-        }
+            if (rescode == response_delete && reqcode == go_to_details) {
+                if(data != null) {
+                    //todO delete the book with the right symbol from the db
+                    String symbolForDelete = data.getStringExtra(symbol_from_delete);
+
+                    for (Book b : books) {
+                        if (b.getCompanySymbol().equals(symbolForDelete)) {
+                            stockDataService.deleteBook(this, b);
+                            books.remove(b);
+                            loadBooksFromRoomAndRefreshList();
+                            return;
+                        }
+                    }
+                }
+            }
+
+            if (rescode == response_save && reqcode == go_to_details) {
+                if(data != null) {
+                    loadBooksFromRoomAndRefreshList();
+                }
+            }
     }
 
     @Override

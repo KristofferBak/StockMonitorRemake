@@ -109,7 +109,7 @@ public final class stockDataService extends Service {
 
             //Inspiration for the foreground service is found here: https://stackoverflow.com/questions/5528288/how-do-i-update-the-notification-text-for-a-foreground-service-in-android
 
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
                 NotificationManager notManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 NotificationChannel notChannel = new NotificationChannel(notification_channel_name, "books", NotificationManager.IMPORTANCE_LOW);
 
@@ -125,10 +125,13 @@ public final class stockDataService extends Service {
                             .setChannelId("books").build();
 
 
-            startForeground(stock_data_service_id, notification);
+         //   startForeground(stock_data_service_id, notification);
             backgroundTask(companySymbol);
 
         }
+
+        else {Log.d(log_msg_stockDataService, "service NOT started because already started");}
+
         //The system will try to recreate the service after/if it is killed:
         return START_STICKY;
     }

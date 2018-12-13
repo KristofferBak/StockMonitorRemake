@@ -19,6 +19,7 @@ import static com.example.kristoffer.stockmonitorremake.GlobalVariables.go_to_ed
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.log_msg_stockDataService;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.put_extra_broadcast_result;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.response_delete;
+import static com.example.kristoffer.stockmonitorremake.GlobalVariables.response_save;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.symbol_from_delete;
 
 public class DetailsActivity extends AppCompatActivity {
@@ -133,6 +134,13 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onActivityResult(int reqcode, int rescode, @Nullable Intent data){
         super.onActivityResult(reqcode, rescode, data);
 
+        if(rescode == RESULT_OK && reqcode == go_to_edit){
+            if (data != null) {
+                Intent intent = new Intent();
+                setResult(response_save, intent);
+                finish();
+            }
+        }
     }
 
     @Override
@@ -141,5 +149,4 @@ public class DetailsActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
         Log.d(log_msg_stockDataService, "Receiver unregistered from detailsActivity");
     }
-
 }

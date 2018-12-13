@@ -40,49 +40,48 @@
         android:id="@+id/textViewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="39dp"
         android:text="@string/name"
         app:layout_constraintBottom_toTopOf="@+id/textViewPrice"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/textViewPrice" />
 
     <TextView
         android:id="@+id/textViewNameDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="46dp"
+        android:layout_marginTop="103dp"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/textViewPriceDisplay"
-        app:layout_constraintStart_toStartOf="@+id/textViewPriceDisplay" />
+        app:layout_constraintStart_toStartOf="@+id/textViewPriceDisplay"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
         android:layout_marginBottom="37dp"
         android:text="@string/price"
         app:layout_constraintBottom_toTopOf="@+id/textViewAmount"
-        app:layout_constraintEnd_toEndOf="@+id/textViewAmount" />
+        app:layout_constraintStart_toStartOf="@+id/textViewAmount" />
 
     <TextView
         android:id="@+id/textViewPriceDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="167dp"
+        android:layout_marginTop="45dp"
         app:layout_constraintStart_toStartOf="@+id/textViewAmountDisplay"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNameDisplay" />
 
     <TextView
         android:id="@+id/textViewAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="33dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginBottom="32dp"
         android:text="@string/amount"
         app:layout_constraintBottom_toTopOf="@+id/textViewSector"
-        app:layout_constraintEnd_toEndOf="@+id/textViewName"
-        app:layout_constraintStart_toStartOf="@+id/textViewTimestamp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewAmountDisplay"
@@ -107,7 +106,7 @@
         android:id="@+id/textViewSectorDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="21dp"
         app:layout_constraintEnd_toStartOf="@+id/textViewTimestampDisplay"
         app:layout_constraintStart_toStartOf="@+id/textViewTimestampDisplay"
         app:layout_constraintTop_toBottomOf="@+id/textViewAmountDisplay" />
@@ -127,7 +126,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="43dp"
-        android:layout_marginBottom="43dp"
+        android:layout_marginBottom="42dp"
         android:text="@string/timestamp"
         app:layout_constraintBottom_toTopOf="@+id/buttonBack"
         app:layout_constraintStart_toStartOf="parent" />

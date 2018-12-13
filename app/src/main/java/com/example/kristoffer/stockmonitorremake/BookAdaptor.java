@@ -40,21 +40,21 @@ public class BookAdaptor extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
-        if (books != null && books.size() > position) {
-            return books.get(position);
+    public Object getItem(int pos) {
+        if (books != null && books.size() > pos) {
+            return books.get(pos);
         }
 
         return null;
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(int pos) {
         return 0;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int pos, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
             LayoutInflater inflater;
@@ -62,21 +62,22 @@ public class BookAdaptor extends BaseAdapter {
             convertView = inflater.inflate(R.layout.portfolio, null);
         }
 
-        if (books != null && books.size() > position) {
-            Book tempBook = books.get(position);
+        if (books != null && books.size() > pos) {
+            Book tempBook = books.get(pos);
 
             TextView txtName = convertView.findViewById(R.id.txtCompName);
             txtName.setText(tempBook.getCompanyName());
             TextView txtCurrentPrice = convertView.findViewById(R.id.txtCurrentPrice);
             txtCurrentPrice.setText(String.valueOf(tempBook.getLatestValue()));
 
+            //The last number in the listView is showing the difference between the current price, and the buying price.
             TextView txtDiffPrice = convertView.findViewById(R.id.txtDiffPrice);
             double latest = tempBook.getLatestValue();
-            double current = tempBook.getLatestValue();
+            double buyingPrice = tempBook.getBuyingPrice();
 
             DecimalFormat df = new DecimalFormat("#.##");
             df.setRoundingMode(RoundingMode.CEILING);
-            String diff = String.valueOf(df.format(latest - current));
+            String diff = String.valueOf(df.format(latest - buyingPrice));
 
             txtDiffPrice.setText(diff);
 

@@ -18,11 +18,18 @@ private EditText editTextAmount;
 private Button save, cancel;
 private Intent intent;
 private stockDataService service;
+private Book book;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+
+        service = new stockDataService();
+
+        intent = getIntent();
+        String symbol = intent.getStringExtra(extra_details_company_symbol);
+        book = service.getBook(this, symbol);
 
         caption = findViewById(R.id.textViewEditCaption);
         textViewCompanyName = findViewById(R.id.textViewComapanyNamyDisplay);
@@ -34,24 +41,37 @@ private stockDataService service;
         cancel.setOnClickListener(l -> cancel());
         save.setOnClickListener(l -> save());
 
-        service = new stockDataService();
-
-        intent = getIntent();
-        String symbol = intent.getStringExtra(extra_details_company_symbol);
-
-        Book book = service.getBook(this, symbol);
+        String amount = String.valueOf(book.getAmount());
+        String bPrice = String.valueOf(book.getBuyingPrice());
 
         textViewCompanyName.setText(book.getCompanyName());
-        editTextAmount.setText(book.getAmount());
-        editTextBuyingPrice.setText(String.valueOf(book.getBuyingPrice()));
+        editTextAmount.setText(amount);
+        editTextBuyingPrice.setText(bPrice);
     }
 
     private void cancel(){
-        setResult(RESULT_CANCELED);
+        Intent intent = new Intent();
+        setResult(RESULT_CANCELED, intent);
         finish();
     }
 
     private void save(){
+        //toDo : validation
 
+        if(editTextAmount.getText() != null || editTextBuyingPrice.getText() != null || editTextAmount.getText().toString() != "" || editTextBuyingPrice.getText().toString() != ""){
+            String editedAmount = editTextAmount.getText().toString();
+            int stringTointAmount = Integer.valueOf(editedAmount);
+
+            String editedBuyingPrice = editTextBuyingPrice.getText().toString();
+            double stringToDoubleBuyingPrice = Double.valueOf(editedBuyingPrice);
+
+            book.setAmount(stringTointAmount);
+            book.setBuyingPrice(stringToDoubleBuyingPrice);
+            service.updateBook(this, book);
+
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
+        }
     }
 }
