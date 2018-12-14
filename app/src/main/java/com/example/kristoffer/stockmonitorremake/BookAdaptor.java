@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -68,6 +70,9 @@ public class BookAdaptor extends BaseAdapter {
             txtName.setText(tempBook.getCompanyName());
             TextView txtCurrentPrice = convertView.findViewById(R.id.txtCurrentPrice);
             txtCurrentPrice.setText(String.valueOf(tempBook.getLatestValue()));
+
+            TextView txtBought = convertView.findViewById(R.id.textViewBought);
+            txtBought.setText(String.valueOf(tempBook.getBuyingPrice()));
 
             //The last number in the listView is showing the difference between the current price, and the buying price.
             TextView txtDiffPrice = convertView.findViewById(R.id.txtDiffPrice);

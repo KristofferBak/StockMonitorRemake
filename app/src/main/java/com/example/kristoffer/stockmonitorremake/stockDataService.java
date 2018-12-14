@@ -6,9 +6,7 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
@@ -31,7 +29,6 @@ import static com.example.kristoffer.stockmonitorremake.GlobalVariables.broadcas
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.connect;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.extra_company_symbol;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.log_msg_stockDataService;
-import static com.example.kristoffer.stockmonitorremake.GlobalVariables.notification_channel_name;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.put_extra_broadcast_result;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.stockDataService_destroyed;
 import static com.example.kristoffer.stockmonitorremake.GlobalVariables.stock_data_service_id;
@@ -47,6 +44,12 @@ import static com.example.kristoffer.stockmonitorremake.GlobalVariables.url_book
  *  Inspiration for this class is found in multiple places:
  *  https://developer.android.com/guide/components/services
  *  https://developer.android.com/training/run-background-service/report-status
+ *  https://stackoverflow.com/questions/1921514/how-to-run-a-runnable-thread-in-android-at-defined-intervals
+ *  Inspiration for the foreground service is found here: https://stackoverflow.com/questions/5528288/how-do-i-update-the-notification-text-for-a-foreground-service-in-android
+ *  Inspiration is also found in "serviceDemo" -example from the course ITSMAP
+ *
+ *  connectToUrl is taken from/inspired by: https://stackoverflow.com/questions/35547375/android-studio-connecting-to-a-url
+ *   + additional inspiration is found here: https://developer.android.com/training/basics/network-ops/connecting (section is called: Use HttpsUrlConnection to fetch data)
  *
  */
 
@@ -124,7 +127,6 @@ public final class stockDataService extends Service {
                             setSmallIcon(R.mipmap.ic_stockdataserviceforeground).setTicker(getText(R.string.stockData_Service))
                             .setChannelId("books").build();
 
-
             startForeground(stock_data_service_id, notification);
             backgroundTask(companySymbol);
 
@@ -172,6 +174,7 @@ public final class stockDataService extends Service {
     }
 
     //connectToUrl is taken from/inspired by: https://stackoverflow.com/questions/35547375/android-studio-connecting-to-a-url
+    //additional inspiration is found here: https://developer.android.com/training/basics/network-ops/connecting (section is called: Use HttpsUrlConnection to fetch data)
     private static String connectToURL(String callUrl) {
         InputStream is = null;
 
@@ -225,7 +228,6 @@ public final class stockDataService extends Service {
 
         return returnString.toString();
     }
-
 
     @Override
     public void onDestroy(){

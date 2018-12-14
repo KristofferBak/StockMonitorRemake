@@ -65,11 +65,11 @@ public class OverviewActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(listener -> addBook());
         update.setOnClickListener(listener -> updatePressed());
 
-        //load books from service
+        //refresh portfolio list (from db - not server)
         loadBooksFromRoomAndRefreshList();
 
         /**
-        //Create testdata:
+        Create testdata:
         Book testBook = new Book();
         testBook.setAmount(10);
         testBook.setTimeStamp(String.valueOf(System.currentTimeMillis()));
@@ -104,15 +104,13 @@ public class OverviewActivity extends AppCompatActivity {
                 Book resultBook = BookJSONParser.parseBookJson(result);
 
                 //Check to see if stock already exists in portfolio
-                boolean stockAlreadyInPortfolio = false;
                 for (Book book: books) {
                     if(book.getCompanySymbol().equals(resultBook.getCompanySymbol())){
-                        stockAlreadyInPortfolio = true;
-                        //toDo find that book in the db and update latestValue and timestamp
+                        //find that book in the db and update latestValue and timestamp
                         book.setLatestValue(resultBook.getLatestValue());
                         book.setTimeStamp(resultBook.getTimeStamp());
                         stockDataService.updateBook(context, book);
-                        //toDo: find the right indexs in portfolio and replace the old book with the new
+
                         for (Book b: books) {
                             if(b.getCompanySymbol().equals(resultBook.getCompanyName())){
                                 b = resultBook;
@@ -135,6 +133,7 @@ public class OverviewActivity extends AppCompatActivity {
         }
     };
 
+    //refresh portfolio list (from db - not server)
     private void loadBooksFromRoomAndRefreshList(){
         books = stockDataService.getBooks(this);
         if(books != null || books.size()!= 0){
@@ -180,7 +179,7 @@ public class OverviewActivity extends AppCompatActivity {
 
             if (rescode == response_delete && reqcode == go_to_details) {
                 if(data != null) {
-                    //todO delete the book with the right symbol from the db
+                    //delete the book with the right symbol from the db
                     String symbolForDelete = data.getStringExtra(symbol_from_delete);
 
                     for (Book b : books) {
@@ -194,6 +193,7 @@ public class OverviewActivity extends AppCompatActivity {
                 }
             }
 
+            //if a book has been edited, we want to refresh to list
             if (rescode == response_save && reqcode == go_to_details) {
                 if(data != null) {
                     loadBooksFromRoomAndRefreshList();

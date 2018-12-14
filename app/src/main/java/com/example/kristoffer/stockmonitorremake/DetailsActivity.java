@@ -9,7 +9,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -24,9 +23,7 @@ import static com.example.kristoffer.stockmonitorremake.GlobalVariables.symbol_f
 
 public class DetailsActivity extends AppCompatActivity {
 
-    private TextView textViewName;
     private TextView textViewCompanyName;
-    private TextView textViewPrice;
     private TextView textViewStockPrice;
     private TextView textViewAmount;
     private TextView textViewAmountOwned;
@@ -53,18 +50,11 @@ public class DetailsActivity extends AppCompatActivity {
         String companySymbol = intent.getStringExtra(extra_details_company_symbol);
         book = service.getBook(this, companySymbol);
 
-        //textViewName = findViewById(R.id.textViewName);
         textViewCompanyName = findViewById(R.id.textViewNameDisplay);
-        //textViewCompanyName.setGravity(Gravity.RELATIVE_HORIZONTAL_GRAVITY_MASK);
-        //textViewPrice = findViewById(R.id.textViewPrice);
         textViewStockPrice = findViewById(R.id.textViewPriceDisplay);
-        //textViewAmount = findViewById(R.id.textViewAmount);
         textViewAmountOwned = findViewById(R.id.textViewAmountDisplay);
-        //textViewSector = findViewById(R.id.textViewSector);
         textViewSectorDisplayed = findViewById(R.id.textViewSectorDisplay);
-        //textViewTimestamp = findViewById(R.id.textViewTimestamp);
         textViewTimestampDisplay = findViewById(R.id.textViewTimestampDisplay);
-        //textViewPrimaryEx = findViewById(R.id.textViewPrimaryEx);
         getTextViewPrimaryExDisplay = findViewById(R.id.textViewPrimaryExDisplay);
 
         back = findViewById(R.id.buttonBack);
@@ -126,10 +116,8 @@ public class DetailsActivity extends AppCompatActivity {
                 book.setLatestValue(updatedValue);
                 book.setTimeStamp(updatedTimestamp);
 
-                textViewAmount.setText(String.valueOf(updatedValue));
                 textViewTimestampDisplay.setText(updatedTimestamp);
 
-                //is this necessary?
                 service.updateBook(context, book);
             }
         }

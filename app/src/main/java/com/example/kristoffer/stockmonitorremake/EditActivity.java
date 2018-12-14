@@ -57,12 +57,8 @@ private Book book;
     }
 
     private void save(){
-        //toDo : validation
-
         if(editTextAmount.getText().toString().trim().equals("")|| editTextBuyingPrice.getText().toString().trim().equals("")){
-
             Toast.makeText(EditActivity.this, "You must input values", Toast.LENGTH_SHORT).show();
-
             return;
         }
 
